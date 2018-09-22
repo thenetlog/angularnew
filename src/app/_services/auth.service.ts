@@ -12,12 +12,19 @@ export class AuthService {
   baseUrl = 'https://localhost:5001/api/auth/';
   userToken: any;
 
-constructor(private http: Http) {}
+  constructor(private http: Http) { }
+
+  value() {
+    return this.http.get('https://localhost:5001/api/values');
+  }
+
+  private options() {
+    const headers = new Headers({ 'Content-type': 'application/json' });
+    return new RequestOptions({headers: headers});
+  }
 
   login(model: any) {
-    const headers = new Headers({'Content-type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.http.post(this.baseUrl + 'login', model, options).pipe(map((response: Response) => {
+    return this.http.post(this.baseUrl + 'login', model, this.options()).pipe(map((response: Response) => {
       const user = response.json();
       if (user) {
         // passing token
@@ -27,7 +34,7 @@ constructor(private http: Http) {}
     }));
   }
 
-  value() {
-    return this.http.get('https://localhost:5001/api/values');
+  register(model: any) {
+    return this.http.post(this.baseUrl + 'register', model, this.options());
   }
 }
