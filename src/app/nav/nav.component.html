@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Dating</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Lists</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
+      </ul>
+      <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
+        <li><a (click)="logout()">Logout</a></li>
+      <li class="nav-item dropdown navbar-right">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Welcome User
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+          <div class="dropdown-divider"></div>
+          <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+        </div>
+      </li>
+    </ul>
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right form-inline" (ngSubmit)=" login()">
+      <div class="form-group">
+        <input type="text" #username="ngModel" placeholder="Email" class="form-control" name="username" [(ngModel)]="model.username">
+      </div>
+      <div class="form-group"> 
+        <input type="password" #password="ngModel" placeholder="Password" class="form-control" name="password"
+        [(ngModel)]="model.password">
+      </div>
+      <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Sign in</button>
+    </form>
+  </div>
+</nav>
+  
+
+
