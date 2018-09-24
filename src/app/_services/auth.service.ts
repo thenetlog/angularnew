@@ -24,6 +24,7 @@ export class AuthService {
     return new RequestOptions({headers: headers});
   }
 
+  // return from our server for our request to API
   private handleError(error: any) {
     const applicationError = error.headers.set('Application-Error');
     if (applicationError) {
